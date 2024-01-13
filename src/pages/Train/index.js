@@ -30,13 +30,13 @@ const TrainList = () => {
             formatter: (cell, row) => (
                 <div>
                     <button
-                        className="btn btn-warning btn-sm me-2"
+                        className="btn btn-outline-warning btn-sm me-2"
                         onClick={() => navigate((`/update/train/${row.id}`))}
                     >
                         Edit
                     </button>
                     <button
-                        className="btn btn-danger btn-sm"
+                        className="btn btn-outline-danger btn-sm"
                         onClick={() => mutate(row.id)}
                     >
                         Delete
@@ -49,8 +49,7 @@ const TrainList = () => {
     return (
         <div className="h-screen flex-grow-1 overflow-y-lg-auto">
             <main className="py-6 bg-surface-secondary me-4">
-                <button onClick={() => navigate("/create/train")} className="btn btn-outline-success mb-4">+ Add Train
-                </button>
+                <button onClick={() => navigate("/create/train")} className="btn btn-outline-success mb-4">+ Add Train</button>
                 <BootstrapTable keyField="id" data={isLoading ? [] : trains} columns={columns} striped hover condensed/>
             </main>
         </div>

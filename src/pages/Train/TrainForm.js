@@ -10,7 +10,7 @@ const TrainForm = () => {
     const { mutate, isPending } = useAddTrain();
     const { train, isLoading } = useGetTrainById(params.trainId);
     const { updateATrain, pendingUpdate } = useUpdateTrain();
-    const { register, handleSubmit, setValue, formState: { errors, isValid } } = useForm({ mode: "onTouched" });
+    const { register, handleSubmit, setValue, formState: { isValid } } = useForm({ mode: "onTouched" });
 
     const handleAddTrain = async (data) => {
         await mutate(data);
@@ -49,7 +49,7 @@ const TrainForm = () => {
                                        {...register("name", {
                                            required: { value: true, message: "Train name is required" },
                                            minLength: { value: 3, message: "Train name must be at least 3 characters long" }})} />
-                                    <label htmlFor="floatingName">Your Name</label>
+                                    <label htmlFor="floatingName">Train Name</label>
                                 </div>
                                 <div className="form-floating mt-4">
                                     <input type="text" className="form-control" id="floatingName" placeholder="Train Type"
@@ -57,11 +57,11 @@ const TrainForm = () => {
                                            required: { value: true, message: "Train type is required" },
                                            minLength: { value: 3, message: "Train type must be at least 3 characters long" }})}
                                     />
-                                    <label htmlFor="floatingName">Your Name</label>
+                                    <label htmlFor="floatingName">Train Type</label>
                                 </div>
                             </div>
                             <div className="flex text-center">
-                                <button disabled={errors || !isValid || pendingUpdate} type="submit" className="btn btn-outline-primary">{isPending ? 'Creating train...' : 'Submit'}</button>
+                                <button disabled={!isValid || pendingUpdate} type="submit" className="btn btn-outline-primary">{isPending ? 'Creating train...' : 'Submit'}</button>
                                 &nbsp;
                                 <button type="reset" onClick={handleReset} className="btn btn-outline-secondary">Reset</button>
                             </div>
