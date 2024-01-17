@@ -121,7 +121,7 @@ const RouteForm = () => {
                                 </div>
                             </div>
                             <div className="flex text-center">
-                                <button type="submit" disabled={isUpdating} className="btn btn-outline-primary">{isPending ? 'Creating seat...' : 'Submit'}</button>
+                                <button type="submit" disabled={isUpdating} className="btn btn-outline-primary">{isPending ? 'Creating route...' : 'Submit'}</button>
                                 &nbsp;
                                 <button type="reset" onClick={handleReset} className="btn btn-outline-secondary">Reset</button>
                             </div>
