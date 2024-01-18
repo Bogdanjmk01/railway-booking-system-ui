@@ -49,7 +49,51 @@ const SeatApi = () => {
         }
     };
 
-    return { getAllSeats, createSeat, getSeatById, updateSeat };
+    const exportToCsv = async () => {
+        try {
+            await axiosPrivate({
+                url: '/user/seats/export/csv',
+                method: 'GET',
+                responseType: 'blob',
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'seats.csv');
+                document.body.appendChild(link);
+                link.click();
+            }).catch((error) => {
+                console.error('Error downloading the file:', error);
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    };
+
+    const exportToPdf = async () => {
+        try {
+            await axiosPrivate({
+                url: '/user/seats/export/pdf',
+                method: 'GET',
+                responseType: 'blob',
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'seats.pdf');
+                document.body.appendChild(link);
+                link.click();
+            }).catch((error) => {
+                console.error('Error downloading the file:', error);
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    };
+
+    return { getAllSeats, createSeat, getSeatById, updateSeat, exportToCsv, exportToPdf };
 };
 
 export default SeatApi;

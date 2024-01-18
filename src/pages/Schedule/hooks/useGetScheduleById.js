@@ -13,7 +13,7 @@ const useGetScheduleById = (id) => {
         console.log(error);
     }
 
-    const schedule = data?.data.schedule;
+    const schedule = data?.data.scheduleToGet;
     console.log(schedule)
 
     return { schedule: schedule, isScheduleLoading: isLoading };

@@ -64,7 +64,7 @@ const SeatForm = () => {
                                 </div>
                                 <div className="form-floating mt-4">
                                     {seat && !seatIsLoading ? (
-                                        <select value={selectedTrainId || ""} onChange={(e) => setSelectedTrainId(e.target.value)}>
+                                        <select className="form-select" value={selectedTrainId || ""} onChange={(e) => setSelectedTrainId(e.target.value)}>
                                             <option value="" disabled>Select Train</option>
                                             {trains.map((train) => (
                                                 <option key={train.id} value={train.id}>{train.name}</option>
@@ -72,7 +72,7 @@ const SeatForm = () => {
                                         </select>
                                     ) : (
                                         !isLoading && (
-                                            <select value={selectedTrainId || ""} onChange={(e) => setSelectedTrainId(e.target.value)}>
+                                            <select className="form-select" value={selectedTrainId || ""} onChange={(e) => setSelectedTrainId(e.target.value)}>
                                                 <option value="" disabled>Select Train</option>
                                                 {trains.map((train) => (
                                                     <option key={train.id} value={train.id}>{train.name}</option>

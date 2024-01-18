@@ -13,7 +13,7 @@ const useGetAllSchedules = () => {
         console.log(isError);
     }
 
-    return { data, isLoading };
+    return { schedules: data?.data.schedules, isLoading };
 };
 
 export default useGetAllSchedules;

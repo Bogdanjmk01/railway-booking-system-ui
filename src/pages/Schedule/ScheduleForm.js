@@ -11,9 +11,9 @@ const ScheduleForm = () => {
     const params = useParams();
     const { mutate, isPending } = useCreateSchedule();
     const { routes, isLoading } = useGetAllRoutes();
-    const { trains } = useGetAllTrains();
+    const { trains, isLoading: isTrainsLoading } = useGetAllTrains();
     const { register, setValue, handleSubmit, formState: { isValid } } = useForm({ mode: "onTouched" });
-    const { schedule, isScheduleLoading } = useGetScheduleById(params.routeId);
+    const { schedule, isScheduleLoading } = useGetScheduleById(params.scheduleId);
     const [train, setTrain] = useState();
     const [route, setRoute] = useState();
     const { updateSchedule, isPendingUpdate } = useUpdateSchedule();
@@ -61,20 +61,20 @@ const ScheduleForm = () => {
             <main className="py-6 bg-surface-secondary me-4">
                 <div className="card">
                     <div className="card-body">
-                        <h3>Add a Route</h3>
+                        <h3>Add a Schedule</h3>
                         <form onSubmit={schedule ? handleSubmit(handleUpdateSchedule) : handleSubmit(handleCreateSchedule)} className="row g-3 mt-3">
                             <div className="col-md-12">
                                 <div className="form-floating mt-4">
                                     {schedule && !isScheduleLoading ? (
-                                        <select value={train || ""} onChange={(e) => setTrain(e.target.value)}>
+                                        <select className="form-select" value={train || ""} onChange={(e) => setTrain(e.target.value)}>
                                             <option value="" disabled>Select Train</option>
                                             {trains.map((train) => (
                                                 <option key={train.id} value={train.id}>{train.name}</option>
                                             ))}
                                         </select>
                                     ) : (
-                                        !isLoading && (
-                                            <select value={train || ""} onChange={(e) => train(e.target.value)}>
+                                        !isTrainsLoading && (
+                                            <select className="form-select" value={train || ""} onChange={(e) => setTrain(e.target.value)}>
                                                 <option value="" disabled>Select Train</option>
                                                 {trains.map((train) => (
                                                     <option key={train.id} value={train.id}>{train.name}</option>
@@ -86,7 +86,7 @@ const ScheduleForm = () => {
                                 </div>
                                 <div className="form-floating mt-4">
                                     {schedule && !isScheduleLoading ? (
-                                        <select value={route || ""} onChange={(e) => setRoute(e.target.value)}>
+                                        <select className="form-select" value={route || ""} onChange={(e) => setRoute(e.target.value)}>
                                             <option value="" disabled>Select Route</option>
                                             {routes.map((station) => (
                                                 <option key={station.id} value={station.id}>{station.id}</option>
@@ -94,7 +94,7 @@ const ScheduleForm = () => {
                                         </select>
                                     ) : (
                                         !isLoading && (
-                                            <select value={route || ""} onChange={(e) => setRoute(e.target.value)}>
+                                            <select className="form-select" value={route || ""} onChange={(e) => setRoute(e.target.value)}>
                                                 <option value="" disabled>Select Route</option>
                                                 {routes.map((route) => (
                                                     <option key={route.id} value={route.id}>{route.id}</option>
@@ -105,7 +105,7 @@ const ScheduleForm = () => {
                                     <label htmlFor="floatingName">Route</label>
                                 </div>
                                 <div className="form-floating mt-4">
-                                    <input type="number" className="form-control" id="floatingName" placeholder="Departure Time"
+                                    <input type="text" className="form-control" id="floatingName" placeholder="Departure Time"
                                            {...register("departureTime", {
                                                required: {value: true, message: "Departure Time is required"}
                                            })}
@@ -113,7 +113,7 @@ const ScheduleForm = () => {
                                     <label htmlFor="floatingName">Departure Time</label>
                                 </div>
                                 <div className="form-floating mt-4">
-                                    <input type="number" className="form-control" id="floatingName"
+                                    <input type="text" className="form-control" id="floatingName"
                                            placeholder="Arrival Time"
                                            {...register("arrivalTime", {
                                                required: {value: true, message: "Arrival Time is required"}

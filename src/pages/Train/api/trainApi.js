@@ -1,4 +1,5 @@
 import useAxiosPrivate from "../../../apiClient/hooks/useAxiosPrivate";
+import apiClient from "../../../apiClient/apiClient";
 
 const TrainApi = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -59,7 +60,51 @@ const TrainApi = () => {
         }
     };
 
-    return { getAllTrains, addTrain, getTrainById, updateTrain, deleteTrain };
+    const exportToCsv = async () => {
+      try {
+          await axiosPrivate({
+              url: '/user/trains/export/csv',
+              method: 'GET',
+              responseType: 'blob',
+          }).then((response) => {
+              const url = window.URL.createObjectURL(new Blob([response.data]));
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', 'trains.csv');
+              document.body.appendChild(link);
+              link.click();
+          }).catch((error) => {
+              console.error('Error downloading the file:', error);
+          });
+      } catch (error) {
+          console.log(error);
+          throw error;
+      }
+    };
+
+    const exportToPdf = async () => {
+        try {
+            await axiosPrivate({
+                url: '/user/trains/export/pdf',
+                method: 'GET',
+                responseType: 'blob',
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'trains.pdf');
+                document.body.appendChild(link);
+                link.click();
+            }).catch((error) => {
+                console.error('Error downloading the file:', error);
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    };
+
+    return { getAllTrains, addTrain, getTrainById, updateTrain, deleteTrain, exportToCsv, exportToPdf };
 };
 
 export default TrainApi;

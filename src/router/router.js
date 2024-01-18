@@ -13,6 +13,7 @@ import RouteList from "../pages/Route";
 import RouteForm from "../pages/Route/RouteForm";
 import ScheduleList from "../pages/Schedule";
 import ScheduleForm from "../pages/Schedule/ScheduleForm";
+import Account from "../pages/Account/Account";
 
 const AppRoutes = () => {
     return (
@@ -23,6 +24,8 @@ const AppRoutes = () => {
 
             <Route element={<PrivateRoute />}>
                 <Route path="/" element={<Layout />}>
+                    <Route path="/account" element={<Account />} />
+
                     <Route path="/trains" element={<TrainList />} />
                     <Route path="/create/train" element={<TrainForm />} />
                     <Route path="/update/train/:trainId" element={<TrainForm />} />
@@ -38,7 +41,7 @@ const AppRoutes = () => {
                     <Route path="/create/route" element={<RouteForm />} />
                     <Route path="/update/route/:routeId" element={<RouteForm />} />
 
-                    <Route path="/schedule" element={<ScheduleList />} />
+                    <Route path="/schedules" element={<ScheduleList />} />
                     <Route path="/create/schedule" element={<ScheduleForm />} />
                     <Route path="/update/schedule/:scheduleId" element={<ScheduleForm />} />
                 </Route>

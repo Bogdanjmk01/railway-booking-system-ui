@@ -65,7 +65,7 @@ const RouteForm = () => {
                             <div className="col-md-12">
                                 <div className="form-floating mt-4">
                                     {route && !routeIsLoading ? (
-                                        <select value={departureStation || ""} onChange={(e) => setDepartureStation(e.target.value)}>
+                                        <select className="form-select" value={departureStation || ""} onChange={(e) => setDepartureStation(e.target.value)}>
                                             <option value="" disabled>Select Departure Station</option>
                                             {stations.map((station) => (
                                                 <option key={station.id} value={station.id}>{station.stationName}</option>
@@ -73,7 +73,7 @@ const RouteForm = () => {
                                         </select>
                                     ) : (
                                         !isLoading && (
-                                            <select value={departureStation || ""} onChange={(e) => setDepartureStation(e.target.value)}>
+                                            <select className="form-select" value={departureStation || ""} onChange={(e) => setDepartureStation(e.target.value)}>
                                                 <option value="" disabled>Select Departure Station</option>
                                                 {stations.map((station) => (
                                                     <option key={station.id} value={station.id}>{station.stationName}</option>
@@ -85,7 +85,7 @@ const RouteForm = () => {
                                 </div>
                                 <div className="form-floating mt-4">
                                     {route && !routeIsLoading ? (
-                                        <select value={arrivalStation || ""} onChange={(e) => setArrivalStation(e.target.value)}>
+                                        <select className="form-select" value={arrivalStation || ""} onChange={(e) => setArrivalStation(e.target.value)}>
                                             <option value="" disabled>Select Arrival Station</option>
                                             {stations.map((station) => (
                                                 <option key={station.id} value={station.id}>{station.stationName}</option>
@@ -93,7 +93,7 @@ const RouteForm = () => {
                                         </select>
                                     ) : (
                                         !isLoading && (
-                                            <select value={arrivalStation || ""} onChange={(e) => setArrivalStation(e.target.value)}>
+                                            <select className="form-select" value={arrivalStation || ""} onChange={(e) => setArrivalStation(e.target.value)}>
                                                 <option value="" disabled>Select Arrival Station</option>
                                                 {stations.map((station) => (
                                                     <option key={station.id} value={station.id}>{station.stationName}</option>

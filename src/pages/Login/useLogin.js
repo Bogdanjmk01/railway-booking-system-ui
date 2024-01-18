@@ -14,7 +14,8 @@ const useLogin = () => {
             toast.success(data.data.message);
         },
         onError: (data) => {
-            toast.error(data.response.data.reason);
+            console.log(data);
+            toast.error("Email or password incorrect");
         }
     });
 

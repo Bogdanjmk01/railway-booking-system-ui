@@ -1,78 +1,88 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/remixicon/remixicon.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../index.css";
+import { LiaTrainSolid } from "react-icons/lia";
+import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
+import { MdTransferWithinAStation } from "react-icons/md";
+import { LiaRouteSolid } from "react-icons/lia";
+import { GrSchedules } from "react-icons/gr";
+import { RiAccountPinCircleFill } from "react-icons/ri";
+import { RiLogoutCircleRFill } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        window.localStorage.clear();
+        navigate("/login");
+        toast.success("Logged out successfully");
+    };
+
     return (
-        <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
-            <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
-                <div class="container-fluid">
-                    <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+        <div className="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+            <nav className="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+                <div className="container-fluid">
+                    <button className="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="navbar-user d-lg-none">
-                        <div class="dropdown">
+                    <div className="navbar-user d-lg-none">
+                        <div className="dropdown">
                             <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
-                                <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Billing</a>
-                                <hr class="dropdown-divider" />
-                                    <a href="#" class="dropdown-item">Logout</a>
+                            <div className="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
+                                <a href="/trains" className="dropdown-item">Trains</a>
+                                <a href="/seats" className="dropdown-item">Seats</a>
+                                <a href="/stations" className="dropdown-item">Stations</a>
+                                <a href="/routes" className="dropdown-item">Routes</a>
+                                <a href="/schedules" className="dropdown-item">Schedules</a>
+                                <hr className="dropdown-divider" />
+                                    <a href="/account" className="dropdown-item">Account</a>
+                                    <a onClick={handleLogout} className="dropdown-item">Logout</a>
                             </div>
                         </div>
                     </div>
-                    <div class="collapse navbar-collapse" id="sidebarCollapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-house"></i> Dashboard
+                    <div className="collapse navbar-collapse" id="sidebarCollapse">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <a href="/trains" className="nav-link">
+                                    <LiaTrainSolid /> Trains
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-bar-chart"></i> Analitycs
+                            <li className="nav-item">
+                                <a className="nav-link" href="/seats">
+                                    <MdOutlineAirlineSeatReclineNormal /> Seats
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-chat"></i> Messages
-                                    <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">6</span>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/stations">
+                                    <MdTransferWithinAStation /> Stations
+                                    {/*<span className="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">6</span>*/}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-bookmarks"></i> Collections
+                            <li className="nav-item">
+                                <a className="nav-link" href="/routes">
+                                    <LiaRouteSolid /> Routes
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-globe-americas"></i> Ranking
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-file-text"></i> Posts
+                            <li className="nav-item">
+                                <a className="nav-link" href="/schedules">
+                                    <GrSchedules /> Schedules
                                 </a>
                             </li>
                         </ul>
-                        <hr class="navbar-divider my-5 opacity-20" />
-                            <div class="mt-auto"></div>
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="bi bi-person-square"></i> Account
+                        <hr className="navbar-divider my-5 opacity-20" />
+                            <div className="mt-auto"></div>
+                            <ul className="navbar-nav">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/account">
+                                        <RiAccountPinCircleFill /> Account
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" onclick="return confirm('Are you sure you want to logout?')">
-                                        <i class="bi bi-box-arrow-left"></i> Logout
+                                <li className="nav-item">
+                                    <a className="nav-link cursor-pointer" onClick={handleLogout}>
+                                        <RiLogoutCircleRFill />Logout
                                     </a>
                                 </li>
                             </ul>

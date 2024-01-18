@@ -12,7 +12,14 @@ const useDeleteRoute = () => {
         },
         onError: (data) => {
             console.log(data);
-            toast.error("An error has occurred while deleting the route");
+            toast.error('Emailul nu a putut fi trimis!', {
+                style: { fontSize: '15px' },
+                position: "bottom-left",
+                autoClose: 2000,
+                closeOnClick: true,
+                pauseOnHover: true,
+                theme: 'light'
+            });
         }
     });
 
